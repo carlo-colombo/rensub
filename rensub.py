@@ -3,8 +3,8 @@
 import re,os,sys,eml
 import pdb
 
-SUBS_FOLDERS=["/home/ilich/Scaricati"]
-VIDEO_FOLDERS=["/home/ilich/download/torrent","/home/ilich/download/jd"]
+SUBS_FOLDERS=["/path/to/subs"]              
+VIDEO_FOLDERS=["/path/to/video","/another/path/to/video"]
 #FORMATS=["avi","mkv","mp4"]
 
 def find(r,directory,exclude=[]):
