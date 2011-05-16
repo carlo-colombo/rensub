@@ -1,5 +1,5 @@
 1. open rensub.py
-2. set multiple absolute path for VIDEO_FOLDERS and SUB_FOLDERS
+2. set multiple absolute path for VIDEO_FOLDERS nad SUB_FOLDERS
 3. set execution permission for rensub.py (chmod u+x rensub)
 4. execute: ./rensub.py <Series name> <Season number> <Episode Number> <optional parameters>
 
