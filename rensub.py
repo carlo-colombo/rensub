@@ -3,8 +3,8 @@
 import re,os,sys,eml
 import pdb
 
-SUBS_FOLDERS=["/path/to/subs"]
-VIDEO_FOLDERS=["/path/to/video","/another/path/to/video"]
+SUBS_FOLDERS=["/home/ilich/Scaricati"]
+VIDEO_FOLDERS=["/home/ilich/download/torrent","/home/ilich/download/jd"]
 #FORMATS=["avi","mkv","mp4"]
 
 def find(r,directory,exclude=[]):
@@ -71,7 +71,7 @@ def main(argv):
     if sub_file and video_file:
         print video_file
         print sub_file
-        renSubs.main(["empty", video_file , sub_file]+argv[4:])
+        eml.main(["empty", video_file , sub_file]+argv[4:])
 
 if __name__=="__main__":
   main(sys.argv)
