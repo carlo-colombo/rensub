@@ -1,10 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import re,os,sys,eml
-import pdb
+import config
 
-SUBS_FOLDERS=["/path/to/subs"]              
-VIDEO_FOLDERS=["/path/to/video","/another/path/to/video"]
 #FORMATS=["avi","mkv","mp4"]
 
 def find(r,directory,exclude=[]):
@@ -23,13 +21,14 @@ def main(argv):
         p=make_pattern(*argv[1:4])
         current_folder = ""
         video_file = None
-        for folder in VIDEO_FOLDERS:
+        for folder in config.VIDEO_FOLDERS:
             current_folder=folder
             l=[i for i in find(p,folder,["zip","srt","txt"])]
             if len(l)!=0:
                 break  
         if len(l)==0:
             print "Video: no match found, please retry"
+            return
         elif len(l)==1:
             video_file=l[0]
         elif len(l)>1:
@@ -46,29 +45,27 @@ def main(argv):
                 video_file=os.path.join(full_path, video_file)
             else:
                 print "No file in the selected folder"
-                video_file=None
+                return
+        
+        video_file=os.path.join(current_folder,video_file)
+        p=make_pattern(*argv[1:4],format="zip")
+        current_subs_folder=""
+        sub_file=None
+        for s in config.SUBS_FOLDERS:
+            current_subs_folder=s
+            l=[i for i in find(p,s)]
+            if len(l)!=0:
+                break
+        if len(l)==0:
+            print "Subtitle: no match found, please retry"
+            return
+        elif len(l)==1:
+            sub_file=l[0]
         else:
-            video_file=os.path.join(current_folder,video_file)
-        if video_file:
-            p=make_pattern(*argv[1:4],format="zip")
-            current_subs_folder=""
-            sub_file=None
-            for s in SUBS_FOLDERS:
-                current_subs_folder=s
-                l=[i for i in find(p,s)]
-                if len(l)!=0:
-                    break
-            if len(l)==0:
-                print "Subtitle: no match found, please retry"
-            elif len(l)==1:
-                sub_file=l[0]
-            else:
-                for k,v in enumerate(l):
-                    print k," ",v
-                sub_file=l[int(raw_input( "Multiple match, please choose: "))]
-            if sub_file:
-                sub_file=os.path.join(current_subs_folder,sub_file)
-    if sub_file and video_file:
+            for k,v in enumerate(l):
+                print k," ",v
+            sub_file=l[int(raw_input( "Multiple match, please choose: "))]
+        sub_file=os.path.join(current_subs_folder,sub_file)
         print video_file
         print sub_file
         eml.main(["empty", video_file , sub_file]+argv[4:])
