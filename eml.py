@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 #/usr/bin/python
 import os,zipfile,os.path,shutil,sys,re
-import pdb
 
 '''Extract, move, launch'''
 
@@ -25,7 +24,7 @@ def rename(avi,srt):
     try:
         shutil.move(temp,avidir)
     except shutil.Error:
-        print "File sottotitolo già esistente, non sovrascritto"
+        print "Subtitle file already exists, not overwritten"
     except OSError:
         pass
     finally:	  
@@ -74,7 +73,7 @@ def main(argv):
                   shutil.copy(avi,argv[4])
                   srtpath=os.path.split(avi)[0]+os.sep+os.path.split(srt)[1]
                   shutil.copy(srtpath,argv[4])
-                  print "Copiato"
+                  print "Copied"
           else:
               print "Error: multiple file in zip."
           
