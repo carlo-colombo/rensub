@@ -1,2 +1,4 @@
-SUBS_FOLDERS=["/path/to/subs"]              
-VIDEO_FOLDERS=["/path/to/video","/another/path/to/video"]
+home="/home/ilich"
+SUBS_FOLDERS=[home+"/Scaricati"]              
+VIDEO_FOLDERS=[home+"/download/torrent",home+"/download/jd"]
+SHELVE_FILE="episode_db"
