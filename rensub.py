@@ -43,7 +43,7 @@ def main(argv):
                 video_file=l[int(raw_input("Many match, choose one: "))]
             full_path=os.path.join(folder,video_file)
             if (os.path.isdir(full_path)):
-                l=find(p,full_path,["nfo"])
+                l=[i for i in find(p,full_path,["nfo"])]
                 if l:
                     for k,v in enumerate(l):
                         print k," ",v
