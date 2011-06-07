@@ -17,7 +17,7 @@ def make_pattern(serie,S,E,format=""):
   s=r".*%s.*0?%s\D\D?0?%s\D.*%s" % (serie,S,E,format)
   return re.compile(s,re.IGNORECASE)
 
-def main(argv):
+def main(argv,as_library=True):
     with closing(shelve.open(config.SHELVE_FILE)) as ep:
         if len(argv)>=4:
             if ep.has_key(argv[1]) and argv[2:4]==['0','0']:
@@ -72,10 +72,14 @@ def main(argv):
                     print k," ",v
                 sub_file=l[int(raw_input( "Multiple match, please choose: "))]
             sub_file=os.path.join(current_subs_folder,sub_file)
-            print video_file
-            print sub_file
-            ep[argv[1]]=tuple(argv[2:4])
-            eml.main(["empty", video_file , sub_file]+argv[4:])
+            if as_library:
+                return (video_file,sub_file)
+            else:
+                print video_file
+                print sub_file
+                ep[argv[1]]=tuple(argv[2:4])
+                eml.main(["empty", video_file , sub_file]+argv[4:])
+                
 
 if __name__=="__main__":
-    main(sys.argv)
+    main(sys.argv,False)
