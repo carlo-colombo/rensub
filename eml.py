@@ -4,17 +4,6 @@ import os,zipfile,os.path,shutil,sys,re
 
 '''Extract, move, launch'''
 
-def find(r,directory):
-  for f in os.listdir(directory):
-    m=r.match(f)
-    if m:
-      yield m.group()
-    
-
-def make_pattern(serie,S,E,formato):
-  s=r".*%s.*0?%s\D\D?0?%s\D.*%s" % (serie,S,E,formato)
-  return re.compile(s,re.IGNORECASE)
-
 def rename(avi,srt):
     '''avi and srt full path -> srt renamed file'''
     avidir,avifile=os.path.split(avi)
