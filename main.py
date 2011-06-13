@@ -42,9 +42,9 @@ config_parser.add_argument('--list-config','-l', nargs=0,action=Config.List)
 
 if __name__=="__main__":
     ns = parser.parse_args()
-    if ns.copy:
+    if "copy" in ns:
         shutils.copy(ns.video_file,ns.copy)
         shutils.copy(ns.srt_file,ns.copy)
-    if ns.execute:
+    if "execute" in ns:
         os.popen(" ".join((ns.execute,ns.video_file)))
 
