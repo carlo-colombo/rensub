@@ -4,8 +4,6 @@ import re,os,sys,eml, shelve
 from contextlib import closing
 import config
 
-#FORMATS=["avi","mkv","mp4"]
-
 def find(r,directory,exclude=[]):
   for f in os.listdir(directory):
     m=r.match(f)
@@ -18,23 +16,22 @@ def make_pattern(serie,S,E,format=""):
   return re.compile(s,re.IGNORECASE)
 
 def main(argv,as_library=True):
-    with closing(shelve.open(config.SHELVE_FILE)) as ep:
+    with config.ctx_shelve() as ep:
         if len(argv)>=4:
             if ep.has_key(argv[1]) and argv[2:4]==['0','0']:
                 argv[2:4]=list(ep[argv[1]])
                 argv[3]=int(argv[3])+1
-            print argv
             p=make_pattern(*argv[1:4])
             current_folder = ""
             video_file = None
-            for folder in config.VIDEO_FOLDERS:
+            for folder in config.video_folders():
                 current_folder=folder
                 l=[i for i in find(p,folder,["zip","srt","txt"])]
                 if len(l)!=0:
                     break  
             if len(l)==0:
                 print "Video: no match found, please retry"
-                return
+                return None,None
             elif len(l)==1:
                 video_file=l[0]
             elif len(l)>1:
@@ -51,20 +48,21 @@ def main(argv,as_library=True):
                     video_file=os.path.join(full_path, video_file)
                 else:
                     print "No file in the selected folder"
-                    return
+                    return None,None
             
             video_file=os.path.join(current_folder,video_file)
             p=make_pattern(*argv[1:4],format="zip")
             current_subs_folder=""
             sub_file=None
-            for s in config.SUBS_FOLDERS:
+            l=[]
+            for s in config.subtitle_folders():
                 current_subs_folder=s
                 l=[i for i in find(p,s)]
                 if len(l)!=0:
                     break
             if len(l)==0:
                 print "Subtitle: no match found, please retry"
-                return
+                return None,None
             elif len(l)==1:
                 sub_file=l[0]
             else:
@@ -73,7 +71,7 @@ def main(argv,as_library=True):
                 sub_file=l[int(raw_input( "Multiple match, please choose: "))]
             sub_file=os.path.join(current_subs_folder,sub_file)
             if as_library:
-                return (video_file,sub_file)
+                return video_file,sub_file
             else:
                 print video_file
                 print sub_file
