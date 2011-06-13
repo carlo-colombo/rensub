@@ -1,9 +1,3 @@
-1. open rensub.py
-2. set multiple absolute path for VIDEO_FOLDERS nad SUB_FOLDERS
-3. set execution permission for rensub.py (chmod u+x rensub)
-4. execute: ./rensub.py <Series name> <Season number> <Episode Number> <optional parameters>
-
-Examples:
-    ./rensub.py doctor 6 4 #extract matching subtitle and move in the video file folder
-    ./rensub.py doctor 6 4 vlc # as above but execute vlc <path-to-video-file> (it may work with other player)
-    ./rensub.py doctor 6 4 copy /media/player # as the first but copy both video and subtitle file to /media/player
+./rensub.py get SHOWNAME [SEASON] [EPISODE] [-e COMMAND] [-c DESTINATION]
+./rensub.py config [--video-folders FOLDER1...] [--sub-folders FOLDER1...]
+./rensub.py manage
