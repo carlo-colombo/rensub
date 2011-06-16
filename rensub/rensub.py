@@ -70,12 +70,12 @@ def main(argv,as_library=True):
                     print k," ",v
                 sub_file=l[int(raw_input( "Multiple match, please choose: "))]
             sub_file=os.path.join(current_subs_folder,sub_file)
+            ep[argv[1]]=tuple(argv[2:4])
             if as_library:
                 return video_file,sub_file
             else:
                 print video_file
                 print sub_file
-                ep[argv[1]]=tuple(argv[2:4])
                 eml.main(["empty", video_file , sub_file]+argv[4:])
                 
 
