@@ -25,21 +25,21 @@ class Rensub(argparse.Action):
         else:
             parser.exit()
 
-parser = argparse.ArgumentParser(description='Subtitles utils')
+parser = argparse.ArgumentParser(description='Subtitles utils',prog='rensub')
 
 subparsers = parser.add_subparsers()
-rensub_parser = subparsers.add_parser('get')
-config_parser = subparsers.add_parser('config')
-manage_parser = subparsers.add_parser('manage')
+rensub_parser = subparsers.add_parser('get', help='extract zip file, move srt in the same folder as video file and rename it.')
+config_parser = subparsers.add_parser('config',help='video and subtitles paths configuration')
+manage_parser = subparsers.add_parser('manage', help='manage episode db')
 
-rensub_parser.add_argument('-c','--copy',metavar='DESTINATION')
-rensub_parser.add_argument('-e','--execute',metavar='PLAYER')
+rensub_parser.add_argument('-c','--copy',metavar='DESTINATION',help='copy both video and subtitle to %(metavar)s')
+rensub_parser.add_argument('-e','--execute',metavar='PLAYER',help='run %(metavar)s with video as first argument')
 rensub_parser.add_argument('show',help="string that can match the name of the show",action=Rensub,nargs='+')
 
 #config
-config_parser.add_argument('--video-folder','-v', nargs='+',action=Config,default=[])
-config_parser.add_argument('--subtitle-folder','-s', nargs='+',action=Config,default=[])
-config_parser.add_argument('--list-config','-l', nargs=0,action=Config.List)
+config_parser.add_argument('--video-folder','-v', nargs='+',action=Config,default=[],help="add paths where regex will run to find video file")
+config_parser.add_argument('--subtitle-folder','-s', nargs='+',action=Config,default=[],help="add paths where regex will run to find subtitles file")
+config_parser.add_argument('--list-config','-l', nargs=0,action=Config.List,help="list configurated path")
 
 #manage
 manage_parser.add_argument('--list','-l',nargs=0,action=Manage)
