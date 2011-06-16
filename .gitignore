@@ -1,0 +1,6 @@
+*~
+*.pyc
+*.pyo
+*.pyt
+*.pytc
+.DS_Store
