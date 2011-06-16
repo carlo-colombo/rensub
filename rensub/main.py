@@ -4,6 +4,7 @@ import eml
 import os
 import shutil
 from config import Config
+from manage import Manage
                 
 class Rensub(argparse.Action):
     def __call__(self,parser, namespace, values, option_string=None):
@@ -39,6 +40,9 @@ rensub_parser.add_argument('show',help="string that can match the name of the sh
 config_parser.add_argument('--video-folder','-v', nargs='+',action=Config,default=[])
 config_parser.add_argument('--subtitle-folder','-s', nargs='+',action=Config,default=[])
 config_parser.add_argument('--list-config','-l', nargs=0,action=Config.List)
+
+#manage
+manage_parser.add_argument('--list','-l',nargs=0,action=Manage)
 
 def main():
     ns = parser.parse_args()
