@@ -1,4 +1,5 @@
-usage: main.py get [-h] [-c DESTINATION] [-e PLAYER] show [show ...]
+#### argparse help output ##########################################################
+usage: rensub get [-h] [-c DESTINATION] [-e PLAYER] show [show ...]
 
 positional arguments:
   show                  string that can match the name of the show
@@ -6,15 +7,25 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   -c DESTINATION, --copy DESTINATION
+                        copy both video and subtitle to DESTINATION
   -e PLAYER, --execute PLAYER
-
-usage: main.py config [-h] [--video-folder VIDEO_FOLDER [VIDEO_FOLDER ...]]
-                      [--subtitle-folder SUBTITLE_FOLDER [SUBTITLE_FOLDER ...]]
-                      [--list-config]
+                        run PLAYER with video as first argument
+####################################################################################
+usage: rensub config [-h] [--video-folder VIDEO_FOLDER [VIDEO_FOLDER ...]]
+                     [--subtitle-folder SUBTITLE_FOLDER [SUBTITLE_FOLDER ...]]
+                     [--list-config]
 
 optional arguments:
   -h, --help            show this help message and exit
   --video-folder VIDEO_FOLDER [VIDEO_FOLDER ...], -v VIDEO_FOLDER [VIDEO_FOLDER ...]
+                        add paths where regex will run to find video file
   --subtitle-folder SUBTITLE_FOLDER [SUBTITLE_FOLDER ...], -s SUBTITLE_FOLDER [SUBTITLE_FOLDER ...]
-  --list-config, -l
+                        add paths where regex will run to find subtitles file
+  --list-config, -l     list configurated path
+####################################################################################
+usage: rensub manage [-h] [--list]
 
+optional arguments:
+  -h, --help  show this help message and exit
+  --list, -l
+####################################################################################
