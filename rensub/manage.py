@@ -6,4 +6,7 @@ class Manage(argparse.Action):
         with config.ctx_shelve() as shelf:
             for k,v in shelf.items():
                 if not k.startswith(config.PREFIX):
-                    print k,v
+                    if 'short_list' in namespace and namespace.short_list:
+                        print k
+                    else:
+                        print k,v
