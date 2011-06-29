@@ -7,5 +7,5 @@ setup(name='Rensub',
     author='Carlo Colombo',
     author_email='carlo.colombo@gmx.com',
     url='https://github.com/carlo-colombo/rensub',
-    scripts=['scripts/rensub','scripts/get-show']
+    scripts=['scripts/rensub','scripts/getshow']
     )
