@@ -18,7 +18,7 @@ def make_pattern(serie,S,E,format=""):
 def main(argv,as_library=True):
     with config.ctx_shelve() as ep:
         if len(argv)>=4:
-            if ep.has_key(argv[1]) and argv[2:4]==['0','0']:
+            if ep.has_key(argv[1]) and argv[2:4]==[0,0]:
                 argv[2:4]=list(ep[argv[1]])
                 argv[3]=int(argv[3])+1
             p=make_pattern(*argv[1:4])
@@ -30,7 +30,7 @@ def main(argv,as_library=True):
                 if len(l)!=0:
                     break  
             if len(l)==0:
-                print "Video: no match found, please retry"
+                print "Video: no match found, please retry", argv[1:4]
                 return None,None
             elif len(l)==1:
                 video_file=l[0]
