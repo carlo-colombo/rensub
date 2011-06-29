@@ -42,8 +42,8 @@ config_parser.add_argument('--subtitle-folder','-s', nargs='+',action=Config,def
 config_parser.add_argument('--list-config','-l', nargs=0,action=Config.List,help="list configurated path")
 
 #manage
+manage_parser.add_argument('--short-list','-s',action='store_true',help="use before --list argument")
 manage_parser.add_argument('--list','-l',nargs=0,action=Manage)
-manage_parser.add_argument('--short-list','-s',action='store_true')
 
 def main():
     ns = parser.parse_args()
