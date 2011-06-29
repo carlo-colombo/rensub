@@ -1,2 +1,2 @@
 #!/bin/sh
-rensub get $0 -e 'vlc -f'
+rensub get $1 -e 'vlc -f'
