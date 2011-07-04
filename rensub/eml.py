@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #/usr/bin/python
-import os,zipfile,os.path,shutil,sys,re
+import os,zipfile,os.path,shutil
 
 '''Extract, move, launch'''
 
@@ -27,22 +27,3 @@ def unzip(zipped):
         out.write(z.read(name))
         out.close()
     return [os.path.join(zipdir,f) for f in files]
-
-def makeAll(avi,zipped):
-    '''avi and zipped file fullpath -> renamed srt file
-    unzip move and rename subtitle file'''
-    files=unzip(zipped)
-    #print files
-    r=-5
-    while (r<0 or r>=len(files)):
-		if len(files)>1:
-			for i in range(len(files)):
-				print "%d: %s" % (i,files[i])
-			r=int(raw_input("Scegli: "))	
-		else:
-			r=0
-    
-    return rename(avi,files[r])
-
-    
-    
