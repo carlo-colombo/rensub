@@ -32,8 +32,6 @@ rensub_parser = subparsers.add_parser('get', help='extract zip file, move srt in
 config_parser = subparsers.add_parser('config',help='video and subtitles paths configuration')
 manage_parser = subparsers.add_parser('manage', help='manage episode db')
 
-rensub_parser.add_argument('-c','--copy',metavar='DESTINATION',help='copy both video and subtitle to %(metavar)s')
-rensub_parser.add_argument('-e','--execute',metavar='PLAYER',help='run %(metavar)s with video as first argument')
 rensub_parser.add_argument('show',help="string that can match the name of the show",action=Rensub,nargs='+')
 
 #config
@@ -47,12 +45,7 @@ manage_parser.add_argument('--list','-l',nargs=0,action=Manage)
 
 def main():
     ns = parser.parse_args()
-    if "copy" in ns and ns.copy:
-        shutil.copy(ns.video_file,ns.copy)
-        shutil.copy(ns.srt_file,ns.copy)
-    if "execute" in ns and ns.execute:
-        os.popen(" ".join((ns.execute,ns.video_file)))
-
+    
 if __name__=="__main__":
     main()
 
