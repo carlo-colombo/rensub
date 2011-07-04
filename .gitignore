@@ -4,3 +4,6 @@
 *.pyt
 *.pytc
 .DS_Store
+build/*
+MANIFEST
+.*
