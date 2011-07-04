@@ -23,7 +23,7 @@ class Rensub(argparse.Action):
             setattr(namespace, "video_file",video_file)
             setattr(namespace, "srt_file",srt_file)
         else:
-            parser.exit()
+            parser.exit(1)
 
 parser = argparse.ArgumentParser(description='Subtitles utils',prog='rensub')
 
