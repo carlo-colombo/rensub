@@ -1,7 +1,7 @@
 import argparse
 import rensub
 import eml
-import os
+import os,sys
 import shutil
 from config import Config
 from manage import Manage
@@ -10,7 +10,6 @@ class Rensub(argparse.Action):
     def __call__(self,parser, namespace, values, option_string=None):
         video_file, zip_file= rensub.main(["rensub"]+values+(3-len(values))*[0])
         if video_file and zip_file:
-            print video_file, zip_file
             srt_file = eml.unzip(zip_file)
             if len(srt_file)>1:
                 print "###################"

@@ -30,8 +30,7 @@ def main(argv,as_library=True):
                 if len(l)!=0:
                     break  
             if len(l)==0:
-                print "Video: no match found, please retry", argv[1:4]
-                return None,None
+                raise Exception("Video: no match found, please retry")
             elif len(l)==1:
                 video_file=l[0]
             elif len(l)>1:
@@ -47,8 +46,7 @@ def main(argv,as_library=True):
                     video_file=l[int(raw_input("Choose one: "))]
                     video_file=os.path.join(full_path, video_file)
                 else:
-                    print "No file in the selected folder"
-                    return None,None
+                    raise Exception("Empty folder")
             
             video_file=os.path.join(current_folder,video_file)
             p=make_pattern(*argv[1:4],format="zip")
@@ -61,8 +59,7 @@ def main(argv,as_library=True):
                 if len(l)!=0:
                     break
             if len(l)==0:
-                print "Subtitle: no match found, please retry"
-                return None,None
+                raise Exception("Subtitle: no match found, please retry")
             elif len(l)==1:
                 sub_file=l[0]
             else:
