@@ -45,7 +45,9 @@ manage_parser.add_argument('--list','-l',nargs=0,action=Manage)
 
 def main():
     ns = parser.parse_args()
+    print ns.video_file
+    return 0
     
 if __name__=="__main__":
-    main()
+    sys.exit(main())
 
