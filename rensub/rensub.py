@@ -5,10 +5,10 @@ from contextlib import closing
 import config
 
 def find(r,directory,exclude=[]):
-  for f in os.listdir(directory):
-    m=r.match(f)
-    if m and str(m.group())[-3:] not in exclude:
-      yield m.group()
+    for f in os.listdir(directory):
+        m=r.match(f)
+        if m and str(m.group())[-3:] not in exclude and not str(m.group()).endswith("torrent"):
+            yield m.group()
     
 
 def make_pattern(serie,S,E,format=""):
