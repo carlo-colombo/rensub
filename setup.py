@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from distutils.core import setup
 setup(name='Rensub',
-    version='1.0.2',
+    version='1.1.0',
     packages=['rensub'],
     description='Subtitles utils',
     author='Carlo Colombo',
