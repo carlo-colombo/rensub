@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import re,os,sys,eml, shelve
+import re,os,sys,eml, shelve,commands
 from contextlib import closing
 import config
 
@@ -78,6 +78,17 @@ def main(argv,as_library=True):
                 print sub_file
                 eml.main(["empty", video_file , sub_file]+argv[4:])
                 
+def hard_link(show_name,video_file,srt_file):
+    r=re.compile(r".*%s.*" % show_name,re.IGNORECASE)
+    for folder in config.link_folders():
+        for f in os.listdir(folder):
+            show_path = os.path.join(folder,f)
+            if os.path.isdir(show_path):
+                m=r.match(f)
+                if m:
+                    for file_to_link in [video_file, srt_file]:
+                        print commands.getoutput("ln -fv '%s' '%s'" % (file_to_link,show_path))
+                    return 
 
 if __name__=="__main__":
     main(sys.argv,False)

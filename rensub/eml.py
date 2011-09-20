@@ -17,7 +17,7 @@ def rename(avi,srt):
     except OSError:
         pass
     finally:	  
-        return temp
+        return os.path.join(avidir,os.path.split(temp)[1])
 
 def unzip(zipped):
     '''zipped fullpath -> srt files

@@ -23,6 +23,9 @@ def video_folders():
 def subtitle_folders():
     return folders(PREFIX+"subtitle_folder")
     
+def link_folders():
+    return folders(PREFIX+"link_folder")
+    
 def ctx_shelve():
     return closing(shelve.open(path(RENSUB_DB)))
 
