@@ -38,7 +38,7 @@ class Config(argparse.Action):
             key=PREFIX+self.dest
             if not  key in shelf:
                 shelf[key]=set()
-            filtered =map(os.path.abspath,filter(os.path.isdir, filter(os.path.exists,values)))
+            filtered =list(map(os.path.abspath,list(filter(os.path.isdir, list(filter(os.path.exists,values))))))
             temp = shelf[key]
             temp.update(filtered)
             shelf[key]=temp
@@ -46,8 +46,8 @@ class Config(argparse.Action):
     class List(argparse.Action):
         def __call__(self,parser, namespace, values, option_string=None):
             with ctx_shelve() as shelf:
-                for key in filter(lambda k: k.startswith(PREFIX),shelf.keys()):
-                    print "*"*5,key.lstrip(PREFIX).replace("_"," "),"*"*10
+                for key in [k for k in list(shelf.keys()) if k.startswith(PREFIX)]:
+                    print("*"*5,key.lstrip(PREFIX).replace("_"," "),"*"*10)
                     for config_value in shelf[key]:
-                        print config_value
+                        print(config_value)
 

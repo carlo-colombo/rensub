@@ -1,23 +1,23 @@
 import argparse
-import rensub
-import eml
+from . import rensub
+from . import eml
 import os
 import shutil
-from config import Config
-from manage import Manage
-from config import link_folders
+from .config import Config
+from .manage import Manage
+from .config import link_folders
                 
 class Rensub(argparse.Action):
     def __call__(self,parser, namespace, values, option_string=None):
         video_file, zip_file= rensub.main(["rensub"]+values+(3-len(values))*[0])
         if video_file and zip_file:
-            print video_file, zip_file
+            print(video_file, zip_file)
             srt_file = eml.unzip(zip_file)
             if len(srt_file)>1:
-                print "###################"
+                print("###################")
                 for i,v in enumerate(srt_file):
-                    print i,v
-                srt_file=srt_file[int(raw_input('Choose one: '))]
+                    print(i,v)
+                srt_file=srt_file[int(input('Choose one: '))]
             else:
                 srt_file=srt_file[0]
             srt_file=eml.rename(video_file,srt_file)

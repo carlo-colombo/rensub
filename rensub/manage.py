@@ -1,12 +1,12 @@
-import config
+from . import config
 import argparse
 
 class Manage(argparse.Action):
     def __call__(self,parser, namespace, values, option_string=None):
         with config.ctx_shelve() as shelf:
-            for k,v in shelf.items():
+            for k,v in list(shelf.items()):
                 if not k.startswith(config.PREFIX):
                     if 'short_list' in namespace and namespace.short_list:
-                        print k
+                        print(k)
                     else:
-                        print k,v
+                        print(k,v)
