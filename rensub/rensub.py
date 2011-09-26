@@ -1,8 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import re,os,sys,eml, shelve,subprocess
+import re,os,sys, shelve,subprocess
 from contextlib import closing
 from . import config
+from . import eml
 
 def find(r,directory,exclude=[]):
     for f in os.listdir(directory):
@@ -24,6 +25,7 @@ def main(argv,as_library=True):
             p=make_pattern(*argv[1:4])
             current_folder = ""
             video_file = None
+            l=[]
             for folder in config.video_folders():
                 current_folder=folder
                 l=[i for i in find(p,folder,["zip","srt","txt"])]
