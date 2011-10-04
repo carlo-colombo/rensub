@@ -1,7 +1,0 @@
-#!/bin/sh
-show=`kdialog --inputbox 'Show Series Episode'`
-message=`rensub get $show -e 'vlc -f'`
-
-if [ $? -ne 0 ]; then
-    kdialog --error $message
-fi

@@ -1,2 +1,0 @@
-#!/bin/sh
-kdialog --inputbox 'Show' | xargs getshow| xargs -0 kdialog --error
