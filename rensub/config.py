@@ -14,7 +14,7 @@ def path(filename=""):
     return os.path.join(os.environ['HOME'],PATH,filename)
     
 def folders(key):
-    with closing(shelve.open(path(RENSUB_DB))) as shelf:
+    with ctx_shelve() as shelf:
         return shelf[key] if key in shelf and shelf[key] else []
 
 def video_folders():
@@ -27,7 +27,7 @@ def link_folders():
     return folders(PREFIX+"link_folder")
     
 def ctx_shelve():
-    return closing(shelve.open(path(RENSUB_DB)))
+    return closing(shelve.open(path(RENSUB_DB),'wu'))
 
 
 class Config(argparse.Action):
